@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales analysis</title>
+    <link rel="stylesheet" href="prj_salesanalysis.css">
+</head>
+
+<body>
+
+    <div id="container">
+        <div id="header">
+            <h1> Sales Analysis Dashboard | FY2018-2019(in USD)</h1>
+        </div>
+        <hr>
+
+        <div id="charts">
+            <div id="row1">
+
+                <div id="statistics">
+                    <p>category with lowest and highest sales</p>
+                    <svg></svg>
+                </div>
+
+                <div id="iterations">
+                    <p>categories crossing average sales in that region</p>
+                    <svg></svg>
+                </div>
+
+            </div>
+            <div id="row2">
+                <div id="search">
+                    <p>categoris, lowest and highest</p>
+                    <svg></svg>
+                </div>
+
+                <div id="transformations">
+                    <p>Total sales with all 4 regions</p>
+                    <svg></svg>
+                </div>
+
+                <div id="sets">
+                    <p>category with common sales valu</p>
+                    <svg></svg>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div id="legend">
+
+        </div>
+    </div>
+
+    <script src="/d3_min_lib/d3.v7.min.js"></script>
+    <script src="prj.salesanalysis.js"></script>
+</body>
+
+</html>
