@@ -104,6 +104,7 @@ const CAT_COLOR_SCALE = d3.scaleOrdinal()
     .domain([...Object.keys(SALES_DATA[0])])
     .range(d3.schemePastel1)
 
+
 // Transition
 const T1 = d3.transition().duration(2500)
 
@@ -184,5 +185,20 @@ SALES_DATA.forEach((obj, index) => {
     d3.select(`#stat${index}`)
         .selectAll('rect')
         .transition(T1)
-        .attr('width', d=> STAT_X_AXIS_SCALE(d)-BUFFER)
+        .attr('width', d => STAT_X_AXIS_SCALE(d) - BUFFER)
 });
+
+
+SALES_DATA.forEach((obj, index) => {
+    d3.select(`#stat${index}`)
+        .selectAll('text')
+        .data([SALES_DATA[index].region])
+        .join('text')
+        .text(d => d[0])
+        .attr('x', '1')
+        .attr('y', linearScale_helper(0, DATA_LENGTH - 1, BUFFER + MAX_HEIGHT / 2, SVG_H_R1 - BUFFER - MAX_HEIGHT / 2)(index))
+        .style('fill', 'gray')
+        .style('font-size', '11')
+})
+
+
