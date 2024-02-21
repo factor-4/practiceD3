@@ -223,6 +223,8 @@ function meanAndMap_helper(obj) {
         }
     }
 
+    console.log(' array ', Object.entries(newObj))
+
     return Object.entries(newObj);
 }
 
@@ -232,5 +234,40 @@ STAT_Y_AXIS(ITER_Y_AXIS_G);
 // x axis
 const ITER_X_AXIS_G = group_helper(ITER_SVG, 'iterXAxis', 0, SVG_H_R1 - BUFFER);
 STAT_X_AXIS(ITER_X_AXIS_G);
+
+// create a group for each data point
+SALES_DATA.forEach((obj, index) => ITER_SVG.append('g').attr('id', `iter${index}`));
+SALES_DATA.forEach((obj, index) => {
+    d3.select(`#iter${index}`)
+        .selectAll('rect')
+        .data(meanAndMap_helper(obj))
+        .join('rect')
+        .attr('height', MAX_HEIGHT / 4 - 2)
+        .attr('x', BUFFER + 2)
+        .attr('y', (d, i) => linearScale_helper(0, DATA_LENGTH - 1, BUFFER, SVG_H_R1 - BUFFER - MAX_HEIGHT)(index) +
+            (MAX_HEIGHT / 4 - 2) * i)
+        .style('fill', (d, i) => CAT_COLOR_SCALE(meanAndMap_helper(obj)[i][0]))
+        .attr('rx', '3')
+        .attr('ry', '3');
+});
+
+SALES_DATA.forEach((obj, index) => {
+    d3.select(`#iter${index}`)
+    .selectAll('rect')
+    .transition(T1)
+    .attr('width',d=> STAT_X_AXIS_SCALE(d[1])-BUFFER)
+})
+
+SALES_DATA.forEach((obj, index) => {
+    d3.select(`#iter${index}`)
+        .selectAll('text')
+        .data([SALES_DATA[index].region])
+        .join('text')
+        .text(d => d[0])
+        .attr('x', '1')
+        .attr('y', linearScale_helper(0, DATA_LENGTH - 1, BUFFER + MAX_HEIGHT / 2, SVG_H_R1 - BUFFER - MAX_HEIGHT / 2)(index))
+        .style('fill', 'gray')
+        .style('font-size', '11')
+})
 
 
