@@ -201,4 +201,36 @@ SALES_DATA.forEach((obj, index) => {
         .style('font-size', '11')
 })
 
+// Iterations
+
+function meanAndMap_helper(obj) {
+    let value = [], newObj = {}, i = 0;
+
+    for (key in obj) {
+        if (Number.isInteger(obj[key])) {
+            value.push(obj[key]);
+        }
+    }
+
+    let meanOutput = d3.map(value, d => d >= d3.mean(value));
+
+    for (key in obj) {
+        if (Number.isInteger(obj[key])) {
+            if (meanOutput[i]) {
+                newObj[key] = obj[key]
+            }
+            i++;
+        }
+    }
+
+    return Object.entries(newObj);
+}
+
+// y axis
+const ITER_Y_AXIS_G = group_helper(ITER_SVG, 'iterYAxis', BUFFER, 0)
+STAT_Y_AXIS(ITER_Y_AXIS_G);
+// x axis
+const ITER_X_AXIS_G = group_helper(ITER_SVG, 'iterXAxis', 0, SVG_H_R1 - BUFFER);
+STAT_X_AXIS(ITER_X_AXIS_G);
+
 
