@@ -270,4 +270,20 @@ SALES_DATA.forEach((obj, index) => {
         .style('font-size', '11')
 })
 
+// search
+let entries = []
+SALES_DATA.forEach((obj, index) => {
+    for( key in obj) {
+        if(Number in obj) {
+            if(Number.isInteger(obj[key])) {
+                entries.push([index, key, obj[key]])
+            }
+        }
+    }
+})
+
+// y axis
+const SEAR_Y_AXIS_SCALE = linearScale_helper(d3.max(max_value), 0, BUFFER, SVG_H_R2, - BUFFER);
+
+
 
