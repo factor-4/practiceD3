@@ -283,7 +283,7 @@ SALES_DATA.forEach((obj, index) => {
 })
 
 // y axis
-const SEAR_Y_AXIS_SCALE = linearScale_helper(d3.max(max_value), 0, BUFFER, SVG_H_R2, - BUFFER);
+
 
 
 
